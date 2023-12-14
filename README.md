@@ -1,5 +1,5 @@
 # EcomTest - ECommerce API
-A brief base for an Ecommerce web API, for Order Creation only
+A base for an Ecommerce web API, for Order Creation only
 
 ## Notes
 
