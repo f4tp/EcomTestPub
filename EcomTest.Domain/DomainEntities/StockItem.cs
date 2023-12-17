@@ -16,27 +16,29 @@ namespace EcomTest.Domain.DomainEntities
         public byte[] RowVersion { get; set; }
 
         [Required]
-        public string ManufacturerCode { get; set; }
+        public string ManufacturerCode { get; private set; }
 
         [Required]
         [Column(TypeName = "BIGINT")]
-        public long ProductId { get; set; }
+        public long ProductId { get; private set; }
 
         /// <summary>
         /// Null value in DB means this stock hasn't been allocated yet
         /// </summary>
         [Column(TypeName = "BIGINT")]
-        public long? OrderItemId { get; set; }
+        public long? OrderItemId { get; private set; }
 
         // Navigation props
-        public Product? Product { get; set; }
+        public Product? Product { get; private set; }
 
-        public OrderItem? OrderItem { get; set; }
+        public OrderItem? OrderItem { get; private set; }
 
         private StockItem() { } // Private constructor for EF
 
         public StockItem(string manufacturerCode, Product product, OrderItem orderItem)
         {
+            OrderItemId = orderItem.Id;
+            ProductId = product.Id;
             ManufacturerCode = manufacturerCode;
             Product = product;
             OrderItem = orderItem;
