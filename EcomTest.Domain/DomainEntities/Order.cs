@@ -9,16 +9,16 @@ namespace EcomTest.Domain.DomainEntities
     {
         //Made nullable as the default behaviour of a non-nullable is to instantiate the date to DateTime.MinValue which is not favourable in this context
         [Required]
-        public DateTime? OrderDate { get; set; }
+        public DateTime? OrderDate { get; private set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         [Range(0.00, double.MaxValue, ErrorMessage = "Order Total Price must be 0 or greater")]
-        public decimal OrderTotalPrice { get; set; }
+        public decimal OrderTotalPrice { get; private set; }
 
         //As above, default behaviour is to set this to 0 if not provided
         [Required]
-        public long? CustomerId { get; set; }
+        public long? CustomerId { get; private set; }
 
         // Navigation props
 
