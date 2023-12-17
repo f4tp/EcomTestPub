@@ -18,25 +18,25 @@ namespace EcomTest.Domain.DomainEntities
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         [Range(0, double.MaxValue, ErrorMessage = "OrderItemTotalPrice must be a non-negative value.")]
-        public decimal? OrderItemTotalPrice { get; set; }
+        public decimal? OrderItemTotalPrice { get; private set; }
 
         //Foreign keys
         [Required]
         [Column(TypeName = "BIGINT")]
-        public long? OrderId { get; set; }
+        public long? OrderId { get; private set; }
 
         [Required]
         [Column(TypeName = "BIGINT")]
-        public long? ProductId { get; set; }
+        public long? ProductId { get; private set; }
 
 
         // Navigation properties
         [ForeignKey(nameof(OrderId))]
-        public Order? Order { get; set; }
+        public Order? Order { get; private set; }
 
 
         [ForeignKey(nameof(ProductId))]
-        public Product? Product { get; set; }
+        public Product? Product { get; private set; }
 
 
         //OrderItem has multiple StockItems (as quantity managed in here)
@@ -78,14 +78,24 @@ namespace EcomTest.Domain.DomainEntities
 
         public StockItem AddStockItem(StockItem stockItem)
         {
+            if(Product == null || Product.BasePrice !> 0)
+                throw new ArgumentException("Problem with Product or its BasePrice");
+
+            if (Quantity == null || Product.BasePrice! > 0)
+                throw new ArgumentException("Problem with OrderItem Quantity");
+
             Quantity += 1;
+            OrderItemTotalPrice = Product?.BasePrice * Quantity;
             _stockItems.Add(stockItem);
             return stockItem;
         }
 
-        public void AdRemoveStockItem(StockItem stockItem)
+        public void RemoveStockItem(StockItem stockItem)
         {
+            if(Quantity == 0)
+                throw new ArgumentException("Cannot reduce qty below 0");
             Quantity -= 1;
+            OrderItemTotalPrice = Product?.BasePrice * Quantity ?? 0;
             _stockItems.Remove(stockItem);
         }
     }
