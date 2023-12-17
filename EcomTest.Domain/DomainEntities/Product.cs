@@ -12,7 +12,7 @@ namespace EcomTest.Domain.DomainEntities
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
-        public decimal BasePrice { get; set; }
+        public decimal BasePrice { get; private set; }
 
 
         //Navigation properties
@@ -32,5 +32,13 @@ namespace EcomTest.Domain.DomainEntities
             Name = name;
             BasePrice = basePrice;
         }
+
+        public decimal UpdateProductPrice(decimal newBasePrice) {
+            if (newBasePrice! > 0) throw new ArgumentException("Base Price must be greater than 0.");
+
+            BasePrice = newBasePrice;
+            return BasePrice;
+                
+        }    
     }
 }
