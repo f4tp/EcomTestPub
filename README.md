@@ -4,12 +4,12 @@ A base for an Ecommerce web API, for Order Creation only
 ## Notes
 
 This is an attempt at an Ecommerce API, for creating Orders only. The following gives a summary of future considerations to make it an effective codebase:
-- I had some issues updating the stock when the Order / Customer / OrderItems are committed as one. It works but coudl be designed better to allow EF to take care of this alongside of adding the Order.
+- I had some issues updating the stock when the Order / Customer / OrderItems are committed as one. It works but could be better designed to allow EF to take care of this alongside of adding the Order.
 -	Mappings - all DTOs in same namespace for my auto automapper mapper routine
 -	Concurrency – added TimeStamp, one for the future
 -	Scope is set at (mostly) public, need to go through and rethink
 -	Not had chance to add documentation tags to all methods
--	Other general considerations that need to be taken on board in future:
+-	Other general considerations that need to be taken on board in future, e.g.
 -	  CORS
 -	  Auth
 -	  Localisation
