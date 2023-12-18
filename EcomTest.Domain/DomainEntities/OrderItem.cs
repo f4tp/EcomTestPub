@@ -56,7 +56,6 @@ namespace EcomTest.Domain.DomainEntities
         // Constructor to create an OrderItem and associate it with an Order
         public OrderItem(int quantity, decimal orderItemTotalPrice, Product product, Order order)
         {
-            // Add validation logic if needed
             if (quantity <= 0)
                 throw new ArgumentException("Quantity must be greater than 0.");
 

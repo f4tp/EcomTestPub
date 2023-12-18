@@ -22,10 +22,9 @@ namespace EcomTest.Domain.DomainEntities
 
         private Product() { } // Private constructor for EF
 
-        //Name and BasePrice can only be set on instantiation of a new instance, as well as through AutoMapper, methods need to be added to be able to do this if required, see below for example
+        //Name and BasePrice can only be set on instantiation of a new instance, as well as through AutoMapper, methods need to be added to be able to do this if required, see below for example of updating e.g. price in an effective way
         public Product(string name, decimal basePrice)
         {
-
             if (basePrice <= 0)
                 throw new ArgumentException("Base Price must be greater than 0.");
 
@@ -38,7 +37,6 @@ namespace EcomTest.Domain.DomainEntities
 
             BasePrice = newBasePrice;
             return BasePrice;
-                
         }    
     }
 }
