@@ -78,10 +78,10 @@ namespace EcomTest.Domain.DomainEntities
 
         public StockItem AddStockItem(StockItem stockItem)
         {
-            if(Product == null || Product.BasePrice !> 0)
+            if(Product == null || Product.BasePrice <= 0)
                 throw new ArgumentException("Problem with Product or its BasePrice");
 
-            if (Quantity == null || Product.BasePrice! > 0)
+            if (Quantity == null || Product.BasePrice <= 0)
                 throw new ArgumentException("Problem with OrderItem Quantity");
 
             Quantity += 1;

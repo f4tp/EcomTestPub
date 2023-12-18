@@ -26,7 +26,7 @@ namespace EcomTest.Domain.DomainEntities
         public Product(string name, decimal basePrice)
         {
 
-            if (basePrice !> 0)
+            if (basePrice <= 0)
                 throw new ArgumentException("Base Price must be greater than 0.");
 
             Name = name;
